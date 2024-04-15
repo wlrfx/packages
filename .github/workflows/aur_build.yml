@@ -1,0 +1,48 @@
+name: Test building the PKGBUILDs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  build:
+    strategy:
+      matrix:
+        pkgname: [ swayfx, swayfx-git, scenefx-git ]
+
+    name: ${{matrix.pkgname}}
+    container: archlinux:base-devel
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install packages
+        run: |
+          pacman-key --init
+          pacman -Sy git glib2 util-linux-libs --noconfirm
+
+      - name: Add builduser
+        run: |
+          # Create the builduser
+          useradd builduser -m
+          # Delete the buildusers password
+          passwd -d builduser
+          # Allow the builduser passwordless sudo
+          printf 'builduser ALL=(ALL) ALL\n' | tee -a /etc/sudoers
+
+      - name: Check out sources
+        uses: actions/checkout@v3
+
+      - name: Test ${{ matrix.version }}
+        run: |
+          file="${{matrix.pkgname}}"
+          build_dir="/tmp/$file"
+          cd ${{matrix.pkgname}}
+          mkdir $build_dir
+          cp -r ./* $build_dir/
+          cd $build_dir
+          sudo chown builduser $build_dir
+          sudo -H -u builduser bash -c 'makepkg -s --noconfirm'
