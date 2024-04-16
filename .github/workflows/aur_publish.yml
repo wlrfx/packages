@@ -1,10 +1,9 @@
 name: Package for the AUR
 
+# Only run when pushed to main
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
