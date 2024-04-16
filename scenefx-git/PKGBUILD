@@ -7,18 +7,24 @@ pkgrel=1
 license=("MIT")
 pkgdesc="A drop-in replacement for the wlroots scene API that allows wayland compositors to render surfaces with eye-candy effects"
 url="https://github.com/wlrfx/scenefx"
-arch=('x86_64')
-depends=('libwlroots.so')
+arch=("x86_64")
+depends=(
+	"libwlroots.so"
+	"libglvnd"
+	"wayland"
+	"libdrm"
+	"libpixman-1.so"
+)
 makedepends=(
-    git
-    'glslang'
-    'meson'
-    'ninja'
-    'wayland-protocols'
+	"git"
+	"glslang"
+	"meson"
+	"ninja"
+	"wayland-protocols"
 )
 optdepends=()
-provides=('libscenefx.so')
-options=('debug')
+provides=("libscenefx.so")
+options=("debug")
 source=("${pkgname%-*}::git+${url}.git")
 sha512sums=("SKIP")
 
