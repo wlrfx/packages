@@ -12,6 +12,7 @@ on:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         pkgname: [ swayfx, swayfx-git, scenefx-git ]
 
