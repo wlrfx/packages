@@ -5,7 +5,7 @@ pkgver=r7046.8d1641c5
 pkgrel=1
 license=("MIT")
 pkgdesc="SwayFX: Sway, but with eye candy!"
-makedepends=(meson ninja scdoc setconf wayland-protocols)
+makedepends=(git meson ninja scdoc setconf wayland-protocols)
 depends=(
 	"cairo"
 	"gdk-pixbuf2"
@@ -57,11 +57,6 @@ provides=("sway" "swayfx")
 conflicts=("sway" "swayfx")
 options=(debug)
 install=sway.install
-
-# prepare() {
-# 	cd "$_pkgname"
-# 	git submodule update --init
-# }
 
 pkgver() {
 	cd "$_pkgname"

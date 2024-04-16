@@ -10,6 +10,7 @@ url="https://github.com/wlrfx/scenefx"
 arch=('x86_64')
 depends=('libwlroots.so')
 makedepends=(
+    git
     'glslang'
     'meson'
     'ninja'
