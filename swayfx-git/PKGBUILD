@@ -1,7 +1,7 @@
 # Maintainer: Erik Reider <erik.reider@protonmail.com>
 _pkgname=swayfx
 pkgname="$_pkgname-git"
-pkgver=r7046.8d1641c5
+pkgver=r7047.8ad2605c
 pkgrel=1
 license=("MIT")
 pkgdesc="SwayFX: Sway, but with eye candy!"
@@ -46,7 +46,7 @@ backup=(
 )
 arch=("i686" "x86_64")
 url="https://github.com/WillPower3309/swayfx"
-source=("${pkgname%-*}::git+${url}.git#branch=scenefx-submodule"
+source=("${pkgname%-*}::git+${url}.git"
 	50-systemd-user.conf
 	sway-portals.conf)
 sha512sums=(
