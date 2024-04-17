@@ -1,0 +1,32 @@
+name: Test building the PKGBUILDs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        pkgname: [ swayfx, swayfx-git, scenefx-git ]
+
+    name: Test PKGBUILD ${{matrix.pkgname}}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out sources
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Test building PKGBUILD
+        id: makepkg
+        uses: edlanglois/pkgbuild-action@v1
+        with:
+          pkgdir: ${{matrix.pkgname}}

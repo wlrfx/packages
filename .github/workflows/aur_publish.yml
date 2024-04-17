@@ -1,0 +1,51 @@
+name: Package for the AUR
+
+# Only run when pushed to main
+on:
+  push:
+    branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  publish:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - pkgname: swayfx
+            assets: |
+              ./swayfx/sway-portals.conf
+              ./swayfx/50-systemd-user.conf
+              ./swayfx/sway.install
+
+          - pkgname: swayfx-git
+            assets: |
+              ./swayfx-git/sway-portals.conf
+              ./swayfx-git/50-systemd-user.conf
+              ./swayfx-git/sway.install
+
+          - pkgname: scenefx-git
+            assets: []
+
+    runs-on: ubuntu-latest
+    working-directory: ${{ matrix.pkgname }}
+    name: ${{ matrix.pkgname }}
+    steps:
+      - name: Check out sources
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Publish AUR Stable package
+        uses: ulises-jeremias/github-actions-aur-publish@v1
+        with:
+          pkgname: ${{ matrix.pkgname }}
+          pkgbuild: PKGBUILD
+          assets: ${{ matrix.assets }}
+          commit_username: ${{ secrets.AUR_USERNAME }}
+          commit_email: ${{ secrets.AUR_EMAIL }}
+          ssh_private_key: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
+          commit_message: Update AUR package
+          ssh_keyscan_types: rsa,dsa,ecdsa,ed25519
+          update_pkgver: false
