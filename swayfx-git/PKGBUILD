@@ -76,10 +76,4 @@ package() {
 	install -Dm644 sway-portals.conf "$pkgdir/usr/share/xdg-desktop-portal/sway-portals.conf"
 
 	DESTDIR="$pkgdir" meson install -C build
-
-	cd "$_pkgname"
-	install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
-	for util in autoname-workspaces.py inactive-windows-transparency.py grimshot; do
-		install -Dm755 "contrib/$util" -t "$pkgdir/usr/share/$pkgname/scripts"
-	done
 }
