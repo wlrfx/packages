@@ -26,10 +26,8 @@ jobs:
               ./swayfx-git/sway.install
 
           - pkgname: scenefx-git
-            assets: []
 
     runs-on: ubuntu-latest
-    working-directory: ${{ matrix.pkgname }}
     name: ${{ matrix.pkgname }}
     steps:
       - name: Check out sources
@@ -41,7 +39,7 @@ jobs:
         uses: ulises-jeremias/github-actions-aur-publish@v1
         with:
           pkgname: ${{ matrix.pkgname }}
-          pkgbuild: PKGBUILD
+          pkgbuild: ${{matrix.pkgname}}/PKGBUILD
           assets: ${{ matrix.assets }}
           commit_username: ${{ secrets.AUR_USERNAME }}
           commit_email: ${{ secrets.AUR_EMAIL }}
