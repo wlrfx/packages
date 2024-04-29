@@ -25,6 +25,7 @@ jobs:
               ./swayfx-git/50-systemd-user.conf
               ./swayfx-git/sway.install
 
+          - pkgname: scenefx
           - pkgname: scenefx-git
 
     runs-on: ubuntu-latest
@@ -47,3 +48,4 @@ jobs:
           commit_message: Update AUR package
           ssh_keyscan_types: rsa,dsa,ecdsa,ed25519
           update_pkgver: false
+
