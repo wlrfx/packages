@@ -1,4 +1,4 @@
-name: Check build for Fedora.
+name: Build RPMs
 
 on:
   push:
@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  RPM-build:
     strategy:
       fail-fast: false
       matrix:
