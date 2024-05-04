@@ -26,8 +26,7 @@ jobs:
     steps:
       - name: Install tooling for source RPM build
         run: |
-          dnf -y install rpkg git
-          dnf -y install 'dnf-command(builddep)'
+          dnf -y install rpkg @rpm-development-tools 'dnf-command(builddep)'
 
       - name: Check out sources
         uses: actions/checkout@v3
