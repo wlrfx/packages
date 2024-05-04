@@ -11,11 +11,6 @@ on:
 
 jobs:
   upload-copr:
-    strategy:
-      fail-fast: false
-      matrix:
-        pkgname: [ swayfx, scenefx ]
-
     container: fedora:latest
     runs-on: ubuntu-latest
     steps:
@@ -36,14 +31,29 @@ jobs:
 
       - name: Install dependencies
         run: |
-          dnf -y install copr-cli
+          dnf -y install copr-cli rpkg @rpm-development-tools
 
       - name: Check out sources
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Submit the build to copr
+      - name: SceneFX Download RPM Spec sources
         run: |
-          cd COPR/${{matrix.pkgname}}
+          cd COPR/scenefx
+          spectool -g ./scenefx.rpkg.spec
+
+      - name: SceneFX Submit the build to copr
+        run: |
+          cd COPR/scenefx
+          rpkg -v copr-build -w ${{ secrets.COPR_REPO_NAME }}
+
+      - name: SwayFX Download RPM Spec sources
+        run: |
+          cd COPR/swayfx
+          spectool -g ./swayfx.rpkg.spec
+
+      - name: SwayFX Submit the build to copr
+        run: |
+          cd COPR/swayfx
           rpkg -v copr-build -w ${{ secrets.COPR_REPO_NAME }}
