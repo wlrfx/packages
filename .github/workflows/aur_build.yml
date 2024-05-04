@@ -2,8 +2,12 @@ name: Test building the PKGBUILDs
 
 on:
   push:
+    paths:
+      - aur/**
     branches: [ main ]
   pull_request:
+    paths:
+      - aur/**
     branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -30,5 +34,5 @@ jobs:
         uses: edlanglois/pkgbuild-action@v1
         with:
           aurDeps: true
-          pkgdir: ${{matrix.pkgname}}
+          pkgdir: aur/${{matrix.pkgname}}
 

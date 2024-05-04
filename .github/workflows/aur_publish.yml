@@ -3,6 +3,8 @@ name: Package for the AUR
 # Only run when pushed to main
 on:
   push:
+    paths:
+      - aur/**
     branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -15,15 +17,15 @@ jobs:
         include:
           - pkgname: swayfx
             assets: |
-              ./swayfx/sway-portals.conf
-              ./swayfx/50-systemd-user.conf
-              ./swayfx/sway.install
+              ./aur/swayfx/sway-portals.conf
+              ./aur/swayfx/50-systemd-user.conf
+              ./aur/swayfx/sway.install
 
           - pkgname: swayfx-git
             assets: |
-              ./swayfx-git/sway-portals.conf
-              ./swayfx-git/50-systemd-user.conf
-              ./swayfx-git/sway.install
+              ./aur/swayfx-git/sway-portals.conf
+              ./aur/swayfx-git/50-systemd-user.conf
+              ./aur/swayfx-git/sway.install
 
           - pkgname: scenefx
           - pkgname: scenefx-git
@@ -40,7 +42,7 @@ jobs:
         uses: ulises-jeremias/github-actions-aur-publish@v1
         with:
           pkgname: ${{ matrix.pkgname }}
-          pkgbuild: ${{matrix.pkgname}}/PKGBUILD
+          pkgbuild: aur/${{matrix.pkgname}}/PKGBUILD
           assets: ${{ matrix.assets }}
           commit_username: ${{ secrets.AUR_USERNAME }}
           commit_email: ${{ secrets.AUR_EMAIL }}
