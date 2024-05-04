@@ -1,0 +1,51 @@
+name: Check build for Fedora.
+
+on:
+  push:
+    paths:
+      - COPR/**
+    branches: [ main ]
+  pull_request:
+    paths:
+      - COPR/**
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        pkgname: [ swayfx, scenefx ]
+
+    name: Test PKGBUILD ${{matrix.pkgname}}
+    container: fedora:latest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install tooling for source RPM build
+        run: |
+          dnf -y install rpkg git
+          dnf -y install 'dnf-command(builddep)'
+
+      - name: Check out sources
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Download RPM Spec sources
+        run: |
+          cd COPR/${{matrix.pkgname}}
+          spectool -g ./${{matrix.pkgname}}.rpkg.spec
+
+      - name: Install build dependencies
+        run: |
+          cd COPR/${{matrix.pkgname}}
+          dnf -y builddep ./${{matrix.pkgname}}.rpkg.spec
+
+      - name: Build RPM
+        run: |
+          cd COPR/${{matrix.pkgname}}
+          mkdir -p out
+          rpkg local --out `pwd`/out
