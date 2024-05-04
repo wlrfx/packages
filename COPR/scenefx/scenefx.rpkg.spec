@@ -84,4 +84,3 @@ MESON_OPTIONS=(
 
 # Changelog will be empty until you make first annotated Git tag.
 # %changelog
-# {{{ git_dir_changelog }}}
