@@ -15,12 +15,7 @@ on:
 
 jobs:
   RPM-build:
-    strategy:
-      fail-fast: false
-      matrix:
-        pkgname: [ swayfx, scenefx ]
-
-    name: Test PKGBUILD ${{matrix.pkgname}}
+    name: Build RPM swayfx
     container: fedora:latest
     runs-on: ubuntu-latest
     steps:
@@ -33,18 +28,39 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Download RPM Spec sources
+      - name: SceneFX Download RPM Spec sources
         run: |
-          cd COPR/${{matrix.pkgname}}
-          spectool -g ./${{matrix.pkgname}}.rpkg.spec
+          cd COPR/scenefx
+          spectool -g ./scenefx.rpkg.spec
 
-      - name: Install build dependencies
+      - name: SceneFX Install build dependencies
         run: |
-          cd COPR/${{matrix.pkgname}}
-          dnf -y builddep ./${{matrix.pkgname}}.rpkg.spec
+          cd COPR/scenefx
+          dnf -y builddep ./scenefx.rpkg.spec
 
-      - name: Build RPM
+      - name: SceneFX Build RPM
         run: |
-          cd COPR/${{matrix.pkgname}}
+          cd COPR/scenefx
+          mkdir -p out
+          rpkg local --out `pwd`/out
+
+      - name: SceneFX Install RPMs
+        run: |
+          cd COPR/scenefx
+          dnf -y install ./out/**/*.rpm
+
+      - name: SwayFX Download RPM Spec sources
+        run: |
+          cd COPR/swayfx
+          spectool -g ./swayfx.rpkg.spec
+
+      - name: SwayFX Install build dependencies
+        run: |
+          cd COPR/swayfx
+          dnf -y builddep ./swayfx.rpkg.spec
+
+      - name: SwayFX Build RPM
+        run: |
+          cd COPR/swayfx
           mkdir -p out
           rpkg local --out `pwd`/out

@@ -18,7 +18,6 @@ jobs:
 
     container: fedora:latest
     runs-on: ubuntu-latest
-    needs: RPM-build
     steps:
       - name: Install API token for copr-cli
         env:
