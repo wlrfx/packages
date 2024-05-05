@@ -47,7 +47,7 @@ jobs:
       - name: SceneFX Install RPMs
         run: |
           cd COPR/scenefx
-          dnf -y install ./out/**/*.rpm
+          dnf -y install ./out/*/*.rpm
 
       - name: SwayFX Download RPM Spec sources
         run: |
@@ -64,3 +64,8 @@ jobs:
           cd COPR/swayfx
           mkdir -p out
           rpkg local --out `pwd`/out
+
+      - name: SwayFX Install RPMs
+        run: |
+          cd COPR/swayfx
+          dnf -y install ./out/*/*.rpm ./out/noarch/*.rpm

@@ -50,7 +50,7 @@ BuildRequires:  pkgconfig(xkbcommon) >= 1.5.0
 
 # Require any of the available configuration packages;
 # Prefer the -upstream one if none are directly specified in the package manager transaction
-Requires:       %{name}-config
+Requires:       sway-config
 Suggests:       %{name}-config-upstream
 
 
@@ -59,6 +59,53 @@ Provides:       sway = %{SwayBaseVersion}
 
 %description
 SwayFX: Sway, but with eye candy!
+
+
+# Configuration presets:
+#
+%package        config-upstream
+Summary:        Upstream configuration for Sway
+BuildArch:      noarch
+Requires:       %{name} = %{version}-%{release}
+Provides:       sway-config = %{version}-%{release}
+Conflicts:      sway-config
+
+# Require the wallpaper referenced in the config.
+# Weak dependency here causes a swaynag warning during the configuration load
+Requires:       sway-wallpapers
+# Lack of graphical drivers may hurt the common use case
+Requires:       mesa-dri-drivers
+# Logind needs polkit to create a graphical session
+Requires:       polkit
+# swaybg is used in the default config
+Requires:       swaybg
+# dmenu (as well as rxvt any many others) requires XWayland on Sway
+Requires:       xorg-x11-server-Xwayland
+
+# Sway binds the terminal shortcut to one specific terminal. In our case foot
+Recommends:     foot
+# grim is the recommended way to take screenshots on sway 1.0+
+Recommends:     grim
+# wmenu is the default launcher in sway, but it still requires dmenu_path to work
+Recommends:     dmenu
+Recommends:     wmenu
+# In addition, xargs is recommended for use in such a launcher arrangement
+Recommends:     findutils
+# Install configs and scripts for better integration with systemd user session
+Recommends:     sway-systemd
+# Both utilities are suggested in the default configuration
+Recommends:     swayidle
+Recommends:     swaylock
+
+# Minimal installation doesn't include Qt Wayland backend
+Recommends:     (qt5-qtwayland if qt5-qtbase-gui)
+Recommends:     (qt6-qtwayland if qt6-qtbase-gui)
+
+%description    config-upstream
+Upstream configuration for Sway.
+Includes all important dependencies for a typical desktop system
+with minimal or no divergence from the upstream.
+
 
 # The artwork is heavy and we don't use it with our default config
 %package        wallpapers
@@ -102,16 +149,16 @@ install -d -m755 -pv %{buildroot}%{_sysconfdir}/sway/config.d
 %{_bindir}/swaybar
 %{_bindir}/swaymsg
 %{_bindir}/swaynag
-
-%config(noreplace) %{_sysconfdir}/sway/config
-%{_datadir}/wayland-sessions/sway.desktop
-
 %dir %{_datadir}/xdg-desktop-portal
 %{_datadir}/xdg-desktop-portal/sway-portals.conf
-
 %{bash_completions_dir}/sway*
 %{fish_completions_dir}/sway*.fish
 %{zsh_completions_dir}/_sway*
+
+
+%files config-upstream
+%config(noreplace) %{_sysconfdir}/sway/config
+%{_datadir}/wayland-sessions/sway.desktop
 
 
 %files wallpapers
