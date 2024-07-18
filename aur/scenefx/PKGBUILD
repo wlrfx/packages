@@ -13,6 +13,7 @@ depends=(
 	"wayland"
 	"libdrm"
 	"libpixman-1.so"
+	"libwlroots.so=12"
 	"wlroots0.17"
 )
 makedepends=(
