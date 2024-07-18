@@ -9,11 +9,11 @@ pkgdesc="A drop-in replacement for the wlroots scene API that allows wayland com
 url="https://github.com/wlrfx/scenefx"
 arch=("x86_64")
 depends=(
-	"libglvnd"
-	"wayland"
 	"libdrm"
+	"libglvnd"
 	"libpixman-1.so"
 	"libwlroots.so=12"
+	"wayland"
 	"wlroots0.17"
 )
 makedepends=(
