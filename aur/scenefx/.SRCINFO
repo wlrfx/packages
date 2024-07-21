@@ -13,7 +13,6 @@ pkgbase = scenefx
 	depends = libdrm
 	depends = libglvnd
 	depends = libpixman-1.so
-	depends = libwlroots.so=12
 	depends = wayland
 	depends = wlroots0.17
 	provides = libscenefx.so
