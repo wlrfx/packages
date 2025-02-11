@@ -30,23 +30,23 @@ jobs:
 
       - name: SceneFX Download RPM Spec sources
         run: |
-          cd COPR/scenefx
-          spectool -g ./scenefx.rpkg.spec
+          cd COPR/scenefx-0.1
+          spectool -g ./scenefx-0.1.rpkg.spec
 
       - name: SceneFX Install build dependencies
         run: |
-          cd COPR/scenefx
-          dnf -y builddep ./scenefx.rpkg.spec
+          cd COPR/scenefx-0.1
+          dnf -y builddep ./scenefx-0.1.rpkg.spec
 
       - name: SceneFX Build RPM
         run: |
-          cd COPR/scenefx
+          cd COPR/scenefx-0.1
           mkdir -p out
           rpkg local --out `pwd`/out
 
       - name: SceneFX Install RPMs
         run: |
-          cd COPR/scenefx
+          cd COPR/scenefx-0.1
           dnf -y install ./out/*/*.rpm
 
       - name: SwayFX Download RPM Spec sources
