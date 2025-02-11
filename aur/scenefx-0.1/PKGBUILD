@@ -24,8 +24,6 @@ makedepends=(
 	"wayland-protocols"
 )
 optdepends=()
-conflicts=("scenefx")
-replaces=("scenefx") # Replace the old scenefx package
 provides=("libscenefx.so")
 options=("debug")
 source=("${_pkgname}-${_pkgver}.tar.gz::${url}/archive/refs/tags/$_pkgver.tar.gz")
