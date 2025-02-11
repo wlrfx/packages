@@ -27,7 +27,8 @@ jobs:
               ./aur/swayfx-git/50-systemd-user.conf
               ./aur/swayfx-git/sway.install
 
-          - pkgname: scenefx
+          - pkgname: scenefx-0.1
+          - pkgname: scenefx-0.2
           - pkgname: scenefx-git
 
     runs-on: ubuntu-latest
