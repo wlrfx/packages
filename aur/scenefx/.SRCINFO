@@ -19,7 +19,7 @@ pkgbase = scenefx
 	conflicts = scenefx
 	conflicts = scenefx-git
 	options = debug
-	source = scenefx-0.1.tar.gz::https://github.com/wlrfx/scenefx/archive/refs/tags/0.2.tar.gz
+	source = scenefx-0.2.tar.gz::https://github.com/wlrfx/scenefx/archive/refs/tags/0.2.tar.gz
 	sha512sums = SKIP
 
 pkgname = scenefx
