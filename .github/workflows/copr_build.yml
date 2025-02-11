@@ -14,8 +14,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  RPM-build:
-    name: Build RPM swayfx
+  RPM-SceneFX-build:
+    strategy:
+      fail-fast: false
+      matrix:
+        pkgname: [ scenefx-0.1, scenefx ]
+    name: Build RPM ${{matrix.pkgname}}
     container: fedora:latest
     runs-on: ubuntu-latest
     steps:
@@ -28,25 +32,62 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: ${{matrix.pkgname}} Download RPM Spec sources
+        run: |
+          cd COPR/${{matrix.pkgname}}
+          spectool -g ./${{matrix.pkgname}}.rpkg.spec
+
+      - name: ${{matrix.pkgname}} Install build dependencies
+        run: |
+          cd COPR/${{matrix.pkgname}}
+          dnf -y builddep ./${{matrix.pkgname}}.rpkg.spec
+
+      - name: ${{matrix.pkgname}} Build RPM
+        run: |
+          cd COPR/${{matrix.pkgname}}
+          mkdir -p out
+          rpkg local --out `pwd`/out
+
+      - name: ${{matrix.pkgname}} Install RPMs
+        run: |
+          cd COPR/${{matrix.pkgname}}
+          dnf -y install ./out/*/*.rpm
+
+  RPM-SwayFX-build:
+    name: Build RPM swayfx
+    container: fedora:latest
+    runs-on: ubuntu-latest
+    env:
+      scenefx_version: "scenefx-0.1"
+    steps:
+      - name: Install tooling for source RPM build
+        run: |
+          dnf -y install rpkg @rpm-development-tools 'dnf-command(builddep)'
+
+      - name: Check out sources
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - name: SceneFX Download RPM Spec sources
         run: |
-          cd COPR/scenefx-0.1
-          spectool -g ./scenefx-0.1.rpkg.spec
+          cd COPR/$scenefx_version
+          spectool -g ./$scenefx_version.rpkg.spec
 
       - name: SceneFX Install build dependencies
         run: |
-          cd COPR/scenefx-0.1
-          dnf -y builddep ./scenefx-0.1.rpkg.spec
+          cd COPR/$scenefx_version
+          dnf -y builddep ./$scenefx_version.rpkg.spec
 
       - name: SceneFX Build RPM
         run: |
-          cd COPR/scenefx-0.1
+          cd COPR/$scenefx_version
           mkdir -p out
           rpkg local --out `pwd`/out
 
       - name: SceneFX Install RPMs
         run: |
-          cd COPR/scenefx-0.1
+          cd COPR/$scenefx_version
           dnf -y install ./out/*/*.rpm
 
       - name: SwayFX Download RPM Spec sources
