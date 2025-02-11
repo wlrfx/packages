@@ -1,8 +1,8 @@
 # Maintainer: Erik Reider <erik.reider@protonmail.com>
 
 _pkgname=scenefx
-_pkgver=0.2
-pkgname="$_pkgname"
+_pkgver=0.1
+pkgname="$_pkgname-$_pkgver"
 pkgver="$_pkgver"
 pkgrel=1
 license=("MIT")
@@ -14,7 +14,7 @@ depends=(
 	"libglvnd"
 	"libpixman-1.so"
 	"wayland"
-	"wlroots"
+	"wlroots0.17"
 )
 makedepends=(
 	"git"
@@ -24,12 +24,13 @@ makedepends=(
 	"wayland-protocols"
 )
 optdepends=()
-provides=("libscenefx-$_pkgver.so")
+provides=("libscenefx.so")
 options=("debug")
 source=("${_pkgname}-${_pkgver}.tar.gz::${url}/archive/refs/tags/$_pkgver.tar.gz")
 sha512sums=("SKIP")
 
 build() {
+	export PKG_CONFIG_PATH='/usr/lib/wlroots0.17/pkgconfig'
 	arch-meson -Dwerror=false "${_pkgname}-${_pkgver}" build
 	meson compile -C build
 }

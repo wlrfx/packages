@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pkgname: [ swayfx, swayfx-git, scenefx, scenefx-git ]
+        pkgname: [ swayfx, swayfx-git, scenefx-0.1, scenefx, scenefx-git ]
 
     name: Test PKGBUILD ${{matrix.pkgname}}
     runs-on: ubuntu-latest
