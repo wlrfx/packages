@@ -16,6 +16,7 @@ pkgbase = scenefx-git
 	depends = libpixman-1.so
 	depends = libwlroots-0.18.so
 	provides = libscenefx-0.2.so
+	replaces = scenefx
 	options = debug
 	source = scenefx::git+https://github.com/wlrfx/scenefx.git
 	sha512sums = SKIP
