@@ -2,7 +2,7 @@
 _pkgname=swayfx
 pkgname="$_pkgname-git"
 pkgver=r7062.ef080851
-pkgrel=1
+pkgrel=2
 license=("MIT")
 pkgdesc="SwayFX: Sway, but with eye candy!"
 makedepends=(
@@ -18,7 +18,7 @@ depends=(
 	"gdk-pixbuf2"
 	"libevdev.so"
 	"libinput"
-	"libscenefx.so"
+	"libscenefx-0.2.1.so"
 	"libjson-c.so"
 	"libpixman-1.so"
 	"libudev.so"
