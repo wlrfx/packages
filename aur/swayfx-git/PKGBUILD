@@ -1,7 +1,6 @@
 # Maintainer: Erik Reider <erik.reider@protonmail.com>
-_pkgname=swayfx
-pkgname="$_pkgname-git"
-pkgver=r7062.ef080851
+pkgname="swayfx-git"
+pkgver=r7069.03a07969
 pkgrel=1
 license=("MIT")
 pkgdesc="SwayFX: Sway, but with eye candy!"
@@ -18,12 +17,12 @@ depends=(
 	"gdk-pixbuf2"
 	"libevdev.so"
 	"libinput"
-	"libscenefx.so"
+	"libscenefx-0.2.so"
 	"libjson-c.so"
 	"libpixman-1.so"
 	"libudev.so"
 	"libwayland-server.so"
-	"wlroots0.17"
+	"libwlroots-0.18.so"
 	"libxcb"
 	"libxkbcommon.so"
 	"pango"
@@ -66,7 +65,7 @@ options=(debug)
 install=sway.install
 
 pkgver() {
-	cd "$_pkgname"
+	cd "swayfx"
 	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
@@ -75,7 +74,7 @@ build() {
 	arch-meson \
 		-Dwerror=false \
 		-Dsd-bus-provider=libsystemd \
-		"$_pkgname" build
+		"swayfx" build
 	meson compile -C build
 }
 
