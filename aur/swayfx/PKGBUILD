@@ -16,6 +16,7 @@ depends=(
 	"libevdev.so"
 	"libinput"
 	"libjson-c.so"
+	"libscenefx-0.1.so"
 	"libudev.so"
 	"libwayland-server.so"
 	"libxcb"
@@ -23,7 +24,6 @@ depends=(
 	"pango"
 	"pcre2"
 	"ttf-font"
-	"libscenefx-0.1.so"
 	"wlroots0.17"
 )
 optdepends=(
