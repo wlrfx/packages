@@ -58,7 +58,7 @@ jobs:
     container: fedora:latest
     runs-on: ubuntu-latest
     env:
-      scenefx_version: "scenefx-0.1"
+      scenefx_version: "scenefx"
     steps:
       - name: Install tooling for source RPM build
         run: |
