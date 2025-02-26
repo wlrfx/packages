@@ -39,8 +39,16 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Changed Files
+        uses: tj-actions/changed-files@v45.0.7
+        id: changed-files
+        with:
+          files: |
+            aur/${{matrix.pkgname}}/**
+
       - name: Publish AUR Stable package
         uses: ulises-jeremias/github-actions-aur-publish@v1
+        if: steps.changed-files.outputs.all_changed_and_modified_files_count > 0
         with:
           pkgname: ${{ matrix.pkgname }}
           pkgbuild: aur/${{matrix.pkgname}}/PKGBUILD
@@ -51,4 +59,3 @@ jobs:
           commit_message: Update AUR package
           ssh_keyscan_types: rsa,ecdsa,ed25519
           update_pkgver: false
-
