@@ -19,7 +19,20 @@ jobs:
     container: fedora:latest
     runs-on: ubuntu-latest
     steps:
+      - name: Check out sources
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Changed Files
+        uses: tj-actions/changed-files@v45.0.7
+        id: changed-files
+        with:
+          files: |
+            COPR/${{matrix.pkgname}}/**
+
       - name: Install API token for copr-cli
+        if: steps.changed-files.outputs.all_changed_and_modified_files_count > 0
         env:
           # To generate a new token: https://copr.fedorainfracloud.org/api/.
           API_LOGIN: ${{ secrets.COPR_API_LOGIN }}
@@ -35,20 +48,18 @@ jobs:
           echo "copr_url = https://copr.fedorainfracloud.org" >> "$HOME/.config/copr"
 
       - name: Install dependencies
+        if: steps.changed-files.outputs.all_changed_and_modified_files_count > 0
         run: |
           dnf -y install copr-cli rpkg @rpm-development-tools
 
-      - name: Check out sources
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
       - name: ${{matrix.pkgname}} Download RPM Spec sources
+        if: steps.changed-files.outputs.all_changed_and_modified_files_count > 0
         run: |
           cd COPR/${{matrix.pkgname}}
           spectool -g ./${{matrix.pkgname}}.rpkg.spec
 
       - name: ${{matrix.pkgname}} Submit the build to copr
+        if: steps.changed-files.outputs.all_changed_and_modified_files_count > 0
         run: |
           cd COPR/${{matrix.pkgname}}
           ls *.spec
