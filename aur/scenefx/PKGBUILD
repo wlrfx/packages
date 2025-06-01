@@ -12,7 +12,7 @@ depends=(
 	"libglvnd"
 	"libpixman-1.so"
 	"wayland"
-	"wlroots"
+	"libwlroots-0.18.so"
 )
 makedepends=(
 	"git"
