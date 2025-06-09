@@ -32,11 +32,11 @@ jobs:
 
       # This step references the directory that contains the action.
       - name: Run COPR Publish Action
-        if: steps.changed-files.outputs.all_changed_and_modified_files_count > 0
+        # if: steps.changed-files.outputs.all_changed_and_modified_files_count > 0
         uses: ./.github/actions/copr-upload-action
         with:
-          api-login: ${{ secrets.COPR_API_LOGIN }}
-          api-username: ${{ secrets.COPR_API_USERNAME }}
-          api-token-content: ${{ secrets.COPR_API_TOKEN }}
-          copr-repo-name: ${{ secrets.COPR_REPO_NAME }}
+          api-login: 'login'
+          api-username: 'username'
+          api-token-content: 'token content'
+          copr-repo-name: 'repo name'
           pkgname: ${{matrix.pkgname}}
