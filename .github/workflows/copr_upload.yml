@@ -35,8 +35,8 @@ jobs:
         if: github.event_name == 'workflow_dispatch' || steps.changed-files.outputs.all_changed_and_modified_files_count > 0
         uses: ./.github/actions/copr-upload-action
         with:
-          api-login: 'login'
-          api-username: 'username'
-          api-token-content: 'token content'
-          copr-repo-name: 'repo name'
+          api-login: ${{ secrets.COPR_API_LOGIN }}
+          api-username: ${{ secrets.COPR_API_USERNAME }}
+          api-token-content: ${{ secrets.COPR_API_TOKEN }}
+          copr-repo-name: ${{ secrets.COPR_REPO_NAME }}
           pkgname: ${{matrix.pkgname}}

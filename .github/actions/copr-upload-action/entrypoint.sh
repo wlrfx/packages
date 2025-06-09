@@ -19,9 +19,6 @@ echo "username = $API_USERNAME" >> "$HOME/.config/copr"
 echo "token = $API_TOKEN_CONTENT" >> "$HOME/.config/copr"
 echo "copr_url = https://copr.fedorainfracloud.org" >> "$HOME/.config/copr"
 
-cat "$HOME/.config/copr"
-exit 1
-
 cd "COPR/$PKGNAME"
 
 # Download RPM Spec sources
