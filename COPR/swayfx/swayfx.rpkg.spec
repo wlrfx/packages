@@ -8,7 +8,7 @@
 
 Name:           swayfx
 Version:        %{tag}
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        SwayFX: Sway, but with eye candy!
 License:        MIT
 URL:            https://github.com/WillPower3309/swayfx
