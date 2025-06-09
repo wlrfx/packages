@@ -32,7 +32,7 @@ jobs:
 
       # This step references the directory that contains the action.
       - name: Run COPR Publish Action
-        if: steps.changed-files.outputs.all_changed_and_modified_files_count > 0
+        if: github.event_name == 'workflow_dispatch' || steps.changed-files.outputs.all_changed_and_modified_files_count > 0
         uses: ./.github/actions/copr-upload-action
         with:
           api-login: ${{ secrets.COPR_API_LOGIN }}
