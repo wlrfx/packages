@@ -4,11 +4,11 @@
 # Change to current Sway base version!
 %global SwayBaseVersion 1.10.1
 # Change to current SwayFX tag!
-%global tag 0.5
+%global tag 0.5.1
 
 Name:           swayfx
 Version:        %{tag}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        SwayFX: Sway, but with eye candy!
 License:        MIT
 URL:            https://github.com/WillPower3309/swayfx
@@ -42,7 +42,7 @@ BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-cursor)
 BuildRequires:  pkgconfig(wayland-server) >= 1.21.0
 BuildRequires:  pkgconfig(wayland-protocols) >= 1.24
-BuildRequires:  pkgconfig(scenefx-0.2)
+BuildRequires:  pkgconfig(scenefx-0.3)
 BuildRequires:  pkgconfig(wlroots-0.18)
 BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xcb-icccm)
