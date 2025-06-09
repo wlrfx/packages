@@ -1,6 +1,6 @@
 # Maintainer: Erik Reider <erik.reider@protonmail.com>
 pkgname="swayfx"
-pkgver=0.5
+pkgver=0.5.1
 pkgrel=1
 license=("MIT")
 pkgdesc="SwayFX: Sway, but with eye candy!"
@@ -22,7 +22,7 @@ depends=(
 	"libxkbcommon.so"
 	"pango"
 	"pcre2"
-	"libscenefx-0.2.so"
+	"libscenefx-0.3.so"
 	"ttf-font"
 	"libwlroots-0.18.so"
 )
