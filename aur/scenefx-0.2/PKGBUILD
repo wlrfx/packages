@@ -1,6 +1,6 @@
 # Maintainer: Erik Reider <erik.reider@protonmail.com>
 
-pkgname=scenefx
+pkgname=scenefx-0.2
 pkgver="0.2.1"
 pkgrel=1
 license=("MIT")
