@@ -24,6 +24,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install tj-actions/changed-files dependencies
+        run: |
+          dnf -y install git nodejs
+
       - name: Changed Files
         uses: tj-actions/changed-files@v46
         id: changed-files
