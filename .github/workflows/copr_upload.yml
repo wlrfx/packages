@@ -28,6 +28,11 @@ jobs:
         run: |
           dnf -y install git nodejs
 
+      # HACK: ensure changed-files can read repo files from git
+      # https://github.com/tj-actions/changed-files/issues/1948
+      - name: Configure Git Safe Directory
+        run: git config --global --add safe.directory /__w/packages/packages
+
       - name: Changed Files
         uses: tj-actions/changed-files@v46
         id: changed-files
