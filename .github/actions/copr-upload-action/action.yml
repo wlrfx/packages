@@ -1,0 +1,27 @@
+name: 'Copr Publish'
+description: 'Publish the provided SPEC to COPR'
+inputs:
+  api-login:
+    description: 'COPR login'
+    required: true
+  api-username:
+    description: 'COPR username'
+    required: true
+  api-token-content:
+    description: 'COPR token'
+    required: true
+  copr-repo-name:
+    description: 'COPR repo name'
+    required: true
+  pkgname:
+    description: 'COPR token'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.api-login }}
+    - ${{ inputs.api-username }}
+    - ${{ inputs.api-token-content }}
+    - ${{ inputs.copr-repo-name }}
+    - ${{ inputs.pkgname }}
