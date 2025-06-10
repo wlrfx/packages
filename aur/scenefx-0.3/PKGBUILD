@@ -1,6 +1,7 @@
 # Maintainer: Erik Reider <erik.reider@protonmail.com>
 
-pkgname=scenefx
+pkgname=scenefx0.3
+_pkgname=scenefx
 pkgver="0.3"
 pkgrel=1
 license=("MIT")
@@ -11,7 +12,7 @@ depends=(
 	"libdrm"
 	"libglvnd"
 	"libpixman-1.so"
-	"libwlroots-0.18.so"
+	"wlroots0.18"
 	"wayland"
 )
 makedepends=(
@@ -24,8 +25,8 @@ makedepends=(
 optdepends=()
 provides=("libscenefx-${pkgver}.so")
 conflicts=("scenefx-git")
-options=("debug")
-source=("scenefx-${pkgver}.tar.gz::${url}/archive/refs/tags/$pkgver.tar.gz")
+replaces=("${_pkgname}")
+source=("${pkgname}.tar.gz::${url}/archive/refs/tags/$pkgver.tar.gz")
 sha512sums=("SKIP")
 
 build() {
