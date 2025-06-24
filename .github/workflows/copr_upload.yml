@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pkgname: [ scenefx-0.1, scenefx-0.2, scenefx-0.3, scenefx, swayfx ]
+        pkgname: [ scenefx-0.2, scenefx-0.3, scenefx, swayfx ]
     name: Upload ${{matrix.pkgname}}
     runs-on: ubuntu-latest
     steps:
