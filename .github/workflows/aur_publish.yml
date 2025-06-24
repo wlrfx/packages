@@ -29,6 +29,7 @@ jobs:
 
           - pkgname: scenefx-0.2
           - pkgname: scenefx0.3
+          - pkgname: scenefx0.4
           - pkgname: scenefx-git
 
     runs-on: ubuntu-latest
