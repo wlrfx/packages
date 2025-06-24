@@ -2,13 +2,13 @@
 
 ### CHANGE THESE VARIABLES BEFORE RELEASE:
 # Change to current Sway base version!
-%global SwayBaseVersion 1.10.1
+%global sway_base_version 1.11
 # Change to current SwayFX tag!
-%global tag 0.5.1
+%global tag 0.5.2
 
 Name:           swayfx
 Version:        %{tag}
-Release:        4%{?dist}
+Release:        1%{?dist}
 Summary:        SwayFX: Sway, but with eye candy!
 License:        MIT
 URL:            https://github.com/WillPower3309/swayfx
@@ -23,7 +23,7 @@ Source101:      sway-portals.conf
 
 BuildRequires:  gcc-c++
 BuildRequires:  gnupg2
-BuildRequires:  meson >= 0.60.0
+BuildRequires:  meson >= 1.3
 BuildRequires:  pkgconfig(cairo)
 BuildRequires:  pkgconfig(gdk-pixbuf-2.0)
 BuildRequires:  pkgconfig(glesv2)
@@ -40,10 +40,10 @@ BuildRequires:  pkgconfig(pixman-1)
 BuildRequires:  pkgconfig(scdoc)
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-cursor)
-BuildRequires:  pkgconfig(wayland-server) >= 1.21.0
-BuildRequires:  pkgconfig(wayland-protocols) >= 1.24
-BuildRequires:  pkgconfig(scenefx-0.3)
-BuildRequires:  pkgconfig(wlroots-0.18)
+BuildRequires:  pkgconfig(wayland-server) >= 1.23.1
+BuildRequires:  pkgconfig(wayland-protocols) >= 1.41
+BuildRequires:  pkgconfig(scenefx-0.4)
+BuildRequires:  pkgconfig(wlroots-0.19)
 BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xcb-icccm)
 BuildRequires:  pkgconfig(xkbcommon) >= 1.5.0
@@ -55,7 +55,7 @@ Suggests:       %{name}-config-upstream
 
 
 Conflicts:      sway
-Provides:       sway = %{SwayBaseVersion}
+Provides:       sway = %{sway_base_version}
 
 %description
 SwayFX: Sway, but with eye candy!

@@ -1,32 +1,37 @@
 # vim: syntax=spec
 
-%global tag 0.3
+# Excludes the micro version, like "0.4"
+%global tag 0.4
+# Includes the micro version, like "0.4.1"
+%global tag_full 0.4.1
+# The Source0 tar file name
+%global tar_name scenefx-%{tag_full}
 
 Name:           scenefx
-Version:        %{tag}
-Release:        4%{?dist}
+Version:        %{tag_full}
+Release:        1%{?dist}
 Summary:        A drop-in replacement for the wlroots scene API that allows wayland compositors to render surfaces with eye-candy effects
 License:        MIT
 URL:            https://github.com/wlrfx/scenefx
-Source0:        %{url}/archive/refs/tags/%{tag}.tar.gz
+Source0:        %{url}/archive/refs/tags/%{tag_full}.tar.gz
 
 
 BuildRequires:  gcc
 BuildRequires:  glslang
 BuildRequires:  gnupg2
-BuildRequires:  meson >= 0.59.0
+BuildRequires:  meson >= 1.3
 
-BuildRequires:  pkgconfig(wlroots-0.18)
+BuildRequires:  pkgconfig(wlroots-0.19)
 BuildRequires:  pkgconfig(egl)
 BuildRequires:  pkgconfig(gbm) >= 17.1.0
 BuildRequires:  pkgconfig(glesv2)
 BuildRequires:  pkgconfig(hwdata)
 BuildRequires:  pkgconfig(libdrm) >= 2.4.122
-BuildRequires:  pkgconfig(pixman-1) >= 0.42.0
+BuildRequires:  pkgconfig(pixman-1) >= 0.43.0
 BuildRequires:  pkgconfig(wayland-client)
-BuildRequires:  pkgconfig(wayland-protocols) >= 1.35
+BuildRequires:  pkgconfig(wayland-protocols) >= 1.41
 BuildRequires:  pkgconfig(wayland-scanner)
-BuildRequires:  pkgconfig(wayland-server) >= 1.23
+BuildRequires:  pkgconfig(wayland-server) >= 1.23.1
 
 %description
 %{summary}
@@ -45,7 +50,7 @@ Development files for %{name}.
 
 
 %prep
-%autosetup -N
+%autosetup -N -n %{tar_name}
 
 %build
 MESON_OPTIONS=(
