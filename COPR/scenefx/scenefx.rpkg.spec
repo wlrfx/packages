@@ -1,9 +1,9 @@
 # vim: syntax=spec
 
 # Excludes the micro version, like "0.4"
-%global tag 0.4
+%global tag 0.5
 # Includes the micro version, like "0.4.1"
-%global tag_full 0.4.1
+%global tag_full 0.5
 # The Source0 tar file name
 %global tar_name scenefx-%{tag_full}
 
@@ -21,17 +21,19 @@ BuildRequires:  glslang
 BuildRequires:  gnupg2
 BuildRequires:  meson >= 1.3
 
-BuildRequires:  pkgconfig(wlroots-0.19)
+BuildRequires:  pkgconfig(wlroots-0.20)
 BuildRequires:  pkgconfig(egl)
-BuildRequires:  pkgconfig(gbm) >= 17.1.0
+BuildRequires:  pkgconfig(gbm) >= 21.1
 BuildRequires:  pkgconfig(glesv2)
 BuildRequires:  pkgconfig(hwdata)
-BuildRequires:  pkgconfig(libdrm) >= 2.4.122
-BuildRequires:  pkgconfig(pixman-1) >= 0.43.0
+BuildRequires:  pkgconfig(lcms2)
+BuildRequires:  pkgconfig(libdrm) >= 2.4.129
+BuildRequires:  pkgconfig(pixman-1) >= 0.46.0
 BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-protocols) >= 1.41
 BuildRequires:  pkgconfig(wayland-scanner)
 BuildRequires:  pkgconfig(wayland-server) >= 1.23.1
+BuildRequires:  pkgconfig(xkbcommon) >= 1.8.0
 
 %description
 %{summary}
