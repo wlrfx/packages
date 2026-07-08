@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pkgname: [ scenefx-0.2, scenefx-0.3, scenefx ]
+        pkgname: [ scenefx-0.3, scenefx-0.4, scenefx ]
     name: Build RPM ${{matrix.pkgname}}
     container: fedora:latest
     runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
     container: fedora:latest
     runs-on: ubuntu-latest
     env:
-      scenefx_version: "scenefx"
+      scenefx_version: "scenefx-0.4"
     steps:
       - name: Install tooling for source RPM build
         run: |
