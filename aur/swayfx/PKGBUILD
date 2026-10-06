@@ -22,7 +22,7 @@ depends=(
         "libxkbcommon.so"
         "pango"
         "pcre2"
-        "scenefx0.5"
+        "scenefx"
         "ttf-font"
         "wlroots0.20"
 )
