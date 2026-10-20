@@ -2,9 +2,9 @@
 
 ### CHANGE THESE VARIABLES BEFORE RELEASE:
 # Change to current Sway base version!
-%global sway_base_version 1.11
+%global sway_base_version 1.12
 # Change to current SwayFX tag!
-%global tag 0.5.2
+%global tag 0.6
 
 Name:           swayfx
 Version:        %{tag}
@@ -42,8 +42,8 @@ BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-cursor)
 BuildRequires:  pkgconfig(wayland-server) >= 1.23.1
 BuildRequires:  pkgconfig(wayland-protocols) >= 1.41
-BuildRequires:  pkgconfig(scenefx-0.4)
-BuildRequires:  pkgconfig(wlroots-0.19)
+BuildRequires:  pkgconfig(scenefx-0.5)
+BuildRequires:  pkgconfig(wlroots-0.20)
 BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xcb-icccm)
 BuildRequires:  pkgconfig(xkbcommon) >= 1.5.0
@@ -86,11 +86,8 @@ Requires:       xorg-x11-server-Xwayland
 Recommends:     foot
 # grim is the recommended way to take screenshots on sway 1.0+
 Recommends:     grim
-# wmenu is the default launcher in sway, but it still requires dmenu_path to work
-Recommends:     dmenu
+# wmenu is the default launcher in sway
 Recommends:     wmenu
-# In addition, xargs is recommended for use in such a launcher arrangement
-Recommends:     findutils
 # Install configs and scripts for better integration with systemd user session
 Recommends:     sway-systemd
 # Both utilities are suggested in the default configuration
@@ -99,7 +96,6 @@ Recommends:     swaylock
 
 # Minimal installation doesn't include Qt Wayland backend
 Recommends:     (qt5-qtwayland if qt5-qtbase-gui)
-Recommends:     (qt6-qtwayland if qt6-qtbase-gui)
 
 %description    config-upstream
 Upstream configuration for Sway.
@@ -119,9 +115,8 @@ Wallpaper collection provided with Sway
 
 %prep
 %autosetup -N -n %{name}-%{tag}
-
 # apply unconditional patches
-%autopatch -p1 -M99
+#autopatch -p1 -M99
 # apply conditional patches
 
 %build
